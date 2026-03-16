@@ -1,0 +1,11 @@
+Flask
+flask-cors
+python-dotenv
+Werkzeug
+google-genai
+Pillow
+openai
+deep-translator
+gTTS
+gunicorn
+google-generativeai
