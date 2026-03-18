@@ -49,20 +49,19 @@ body {
 /* ================= MAIN NAVBAR LAYOUT ================= */
 .navbar {
     position: fixed;
-    top: 25px;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: auto;
-    /* Fit content to avoid forcing stretch */
-    max-width: 95vw;
+    width: 95%;
+    max-width: 1400px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-between;
+    gap: 20px;
     z-index: 1000;
-    padding: 0;
+    padding: 0 10px;
     box-sizing: border-box;
-    flex-wrap: nowrap;
+    transition: all 0.3s ease;
 }
 
 .nav-branding-detached {
@@ -116,8 +115,8 @@ body {
 .nav-main-glass {
     display: flex;
     align-items: center;
-    gap: 25px;
-    padding: 0 35px;
+    gap: 100px;
+    padding: 0 65px;
     height: 70px;
     width: auto;
     flex-shrink: 0;
@@ -167,25 +166,47 @@ body {
 }
 
 /* Specific links in mobile menu */
-.admin-mobile-link { color: #ffd700 !important; }
-.logout-mobile-link { color: #f87171 !important; }
-.login-mobile-link { color: #00f5ff !important; }
-.guest-mobile-link { color: #00ffcc !important; }
+.admin-mobile-link {
+    color: #ffd700 !important;
+}
+
+.logout-mobile-link {
+    color: #f87171 !important;
+}
+
+.login-mobile-link {
+    color: #00f5ff !important;
+}
+
+.guest-mobile-link {
+    color: #00ffcc !important;
+}
 
 @media screen and (min-width: 1151px) {
-    .admin-mobile-link, .logout-mobile-link, .login-mobile-link, .guest-mobile-link {
+
+    .admin-mobile-link,
+    .logout-mobile-link,
+    .login-mobile-link,
+    .guest-mobile-link {
         display: none !important;
     }
 }
 
 /* ================= NAV CONTENT: BUTTONS PILL ================= */
+.datavidwan-logo-nav {
+    height: 35px;
+    width: auto;
+}
+
+/* Base Mobile/Tablet Menu Drawer Styles */
 .nav-buttons {
     display: flex;
-    gap: 30px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 40px;
-    border-radius: 35px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 30px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     transition: 0.4s;
     align-items: center;
 }
@@ -195,34 +216,63 @@ body {
     color: #94a3b8;
     font-weight: 600;
     font-size: 14px;
-    transition: 0.3s;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 1px;
     text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-btn:hover {
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    color: #00f5ff;
+    background: rgba(0, 245, 255, 0.08);
+    transform: translateY(-2px);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.4);
 }
 
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transition: 0.5s;
+}
 
+.nav-btn:hover::before {
+    left: 100%;
+}
 
+.nav-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #00f5ff;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.8);
+}
 
+.nav-btn:hover::after {
+    width: 40%;
+}
 
-
-
-/* ================= RESPONSIVE DESIGN ================= */
-
-/* Tablet View (Show Burger Menu below 1100px) */
 @media screen and (max-width: 1150px) {
-    .navbar {
-        gap: 10px;
-        justify-content: center;
-        width: 95%;
-    }
-
     .nav-buttons {
-        display: none !important;
+        display: none;
     }
 
     .mobile-menu-toggle {
@@ -233,32 +283,6 @@ body {
         display: none !important;
     }
 
-    .nav-main-glass {
-        padding: 0 15px;
-        height: 60px;
-        width: 100%;
-        max-width: 500px; /* Cap width on tablet */
-        justify-content: space-between;
-    }
-
-    .mobile-only-links {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .nav-branding-detached {
-        padding: 6px 12px;
-        /* Smaller pill for tablet */
-    }
-
-    .datavidwan-logo-nav {
-        height: 35px;
-        width: auto;
-    }
-
-    /* Mobile/Tablet Menu Drawer */
     .nav-buttons.active {
         display: flex !important;
         position: fixed;
@@ -281,11 +305,23 @@ body {
     }
 
     .nav-buttons.active .nav-btn {
-        display: block !important;
-        font-size: 18px;
-        padding: 10px;
+        display: flex !important;
+        font-size: 16px;
+        padding: 12px;
         width: 100%;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        margin-bottom: 5px;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-buttons.active .nav-btn:hover {
+        background: rgba(0, 245, 255, 0.1);
+        transform: scale(1.02);
+    }
+
+    .nav-buttons.active .nav-btn::after {
+        display: none;
+        /* Hide animated underline in vertical mobile menu */
     }
 }
 
@@ -300,54 +336,6 @@ body {
         transform: translateY(0) scale(1);
     }
 }
-
-/* Mobile View (Below 768px) */
-@media screen and (max-width: 767px) {
-    .navbar {
-        top: 10px;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .nav-branding-detached {
-        padding: 6px 15px;
-        background: rgba(255, 255, 255, 0.85);
-        /* Restored background */
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        border-radius: 30px;
-    }
-
-    .datavidwan-logo-nav {
-        height: 30px;
-        width: auto;
-    }
-
-    .nav-main-glass {
-        width: 100%;
-        max-width: 320px; /* Very tight on mobile */
-        border-radius: 20px;
-        padding: 0 10px;
-    }
-
-    .logo-highlight {
-        font-size: 16px; /* Smaller text on mobile */
-        letter-spacing: 1px;
-    }
-
-    .logo-img {
-        height: 25px;
-    }
-    
-    .logo {
-        gap: 6px;
-        padding-right: 10px;
-    }
-}
-
-
-
 
 
 .hero {
@@ -1065,19 +1053,9 @@ html {
     scroll-behavior: smooth;
 }
 
-/* ================= RESPONSIVE DESIGN ================= */
+/* ================= CLEAN RESPONSIVE DESIGN ================= */
 
-@media (max-width: 1024px) {
-    .navbar {
-        width: 95%;
-        padding: 8px 20px;
-    }
-
-    .nav-btn {
-        font-size: 18px;
-        padding: 6px 12px;
-    }
-
+@media screen and (max-width: 1024px) {
     .hero-container {
         gap: 20px;
     }
@@ -1087,49 +1065,9 @@ html {
     }
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
     .datavidwan-container {
         display: none;
-    }
-
-    .datavidwan-logo-nav {
-        display: block;
-        height: 35px;
-        padding: 3px 8px;
-    }
-
-    .navbar {
-        width: 98%;
-        padding: 5px 15px;
-        height: auto;
-        flex-direction: row;
-        justify-content: space-between;
-        top: 10px;
-    }
-
-    .nav-logos-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .logo-img {
-        height: 30px;
-        transform: scale(1);
-    }
-
-    .logo-highlight {
-        font-size: 20px;
-    }
-
-    .nav-buttons {
-        gap: 10px;
-    }
-
-    .nav-btn {
-        font-size: 14px;
-        padding: 5px 8px;
     }
 
     .hero-container {
@@ -1147,39 +1085,7 @@ html {
     }
 }
 
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        padding: 5px 10px;
-    }
-
-    .nav-logos-container {
-        gap: 5px;
-    }
-
-    .datavidwan-logo-nav {
-        height: 28px;
-        padding: 2px 6px;
-    }
-
-    .logo-img {
-        height: 25px;
-    }
-
-    .logo-highlight {
-        font-size: 16px;
-    }
-
-    .nav-buttons {
-        gap: 5px;
-    }
-
-    .nav-btn {
-        font-size: 11px;
-        padding: 4px 6px;
-    }
+@media screen and (max-width: 768px) {
 
     .how-ai-works,
     .ai-features {
@@ -1214,7 +1120,7 @@ html {
     }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .hero-left h1 {
         font-size: 34px;
     }
@@ -1236,7 +1142,6 @@ html {
         width: 100%;
         max-width: 250px;
         text-align: center;
-        box-sizing: border-box;
     }
 
     .glass-card {
@@ -1251,14 +1156,6 @@ html {
 
     .section-title {
         font-size: 28px;
-    }
-
-    .ai-step-card {
-        padding: 20px;
-    }
-
-    .upload-box {
-        padding: 30px 15px;
     }
 }
 
@@ -1375,4 +1272,54 @@ body {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.4);
     margin-top: 10px;
+}
+
+/* Mobile View (Below 768px) - Priority Fix */
+@media screen and (max-width: 767px) {
+    .navbar {
+        top: 10px !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: center !important;
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
+        padding: 0 10px !important;
+    }
+
+    .nav-branding-detached {
+        padding: 4px 12px !important;
+        border-radius: 20px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .datavidwan-logo-nav {
+        height: 25px !important;
+    }
+
+    .nav-main-glass {
+        width: 100% !important;
+        max-width: 350px !important;
+        height: 55px !important;
+        border-radius: 15px !important;
+        padding: 0 12px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .logo-highlight {
+        font-size: 18px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .logo-img {
+        height: 22px !important;
+    }
+
+    .logo {
+        gap: 8px !important;
+        padding-right: 8px !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
 }

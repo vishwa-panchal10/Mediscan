@@ -23,7 +23,7 @@ def clean_text(text):
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
-def generate_audio(text, lang_code, folder):
+def generate_tts(text, lang_code, folder):
 
     if lang_code not in SUPPORTED_LANGS:
         lang_code = "en"  # fallback to English
@@ -36,4 +36,4 @@ def generate_audio(text, lang_code, folder):
     tts = gTTS(text=clean, lang=lang_code)
     tts.save(path)
 
-    return f"/static/audio/{filename}"
+    return filename

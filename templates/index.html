@@ -40,17 +40,6 @@
                     <a href="#features" class="nav-btn" id="nav-features">Features</a>
                     <a href="#how-it-works" class="nav-btn" id="nav-how">How It Works</a>
                     <a href="#analyzer" class="nav-btn" id="nav-analyzer">Analyze</a>
-                    
-                    <!-- Authentication Links (Directly in menu for mobile '3 line' look) -->
-                    {% if session.get('user_id') or session.get('is_guest') %}
-                        {% if session.get('is_admin') %}
-                        <a href="/admin" class="nav-btn admin-mobile-link">Admin Panel</a>
-                        {% endif %}
-                        <a href="/logout" class="nav-btn logout-mobile-link">Logout</a>
-                    {% else %}
-                        <a href="/login" class="nav-btn login-mobile-link">Login</a>
-                        <a href="/guest" class="nav-btn guest-mobile-link">Continue as Guest</a>
-                    {% endif %}
                 </nav>
                 <button class="mobile-menu-toggle" id="menuToggle">
                     <span></span>
@@ -59,22 +48,9 @@
                 </button>
             </div>
 
-            <!-- Right: User Actions -->
+            <!-- Right: User Actions (Removed auth links) -->
             <div class="nav-right">
-                {% if session.get('user_id') or session.get('is_guest') %}
-                <div class="user-profile">
-                    {% if session.get('is_admin') %}
-                    <a href="/admin" class="nav-btn admin-btn">Admin Panel</a>
-                    {% endif %}
-                    <span class="user-display">{{ session.get('user_email') }}</span>
-                    <a href="/logout" class="logout-btn">Logout</a>
-                </div>
-                {% else %}
-                <div class="auth-buttons-nav">
-                    <a href="/login" class="nav-btn login-btn">Login</a>
-                    <a href="/guest" class="nav-btn signup-btn">Continue as Guest</a>
-                </div>
-                {% endif %}
+                <a href="#analyzer" class="primary-cta" style="font-size: 13px; padding: 10px 20px;">Get Started</a>
             </div>
         </div>
 
@@ -94,12 +70,7 @@
                 </h1>
 
                 <div class="hero-buttons">
-                    {% if session.get('user_id') or session.get('is_guest') %}
                     <a href="#analyzer" class="primary-cta">Start Analyzing</a>
-                    {% else %}
-                    <a href="/login" class="primary-cta">Login Now</a>
-                    <a href="/guest" class="secondary-cta">Continue as Guest</a>
-                    {% endif %}
                     <a href="#how-it-works" class="secondary-cta">How It Works</a>
                 </div>
             </div>
@@ -176,7 +147,6 @@
     <section class="analyzer-section" id="analyzer">
         <div class="analyzer-card">
 
-            {% if session.get('user_id') or session.get('is_guest') %}
             <h2 class="section-title">Analyze Medicine</h2>
 
             <!-- Upload & Camera -->
@@ -249,16 +219,6 @@
             <div id="result" class="result-box">
                 <!-- Results appear here -->
             </div>
-            {% else %}
-            <div class="auth-required">
-                <h2 class="section-title">Analyze Medicine</h2>
-                <p>Please login or continue as guest to use our AI Powered Medicine Identifier.</p>
-                <div class="auth-buttons" style="margin-top: 20px;">
-                    <a href="/login" class="primary-cta">Login Now</a>
-                    <a href="/guest" class="secondary-cta">Continue as Guest</a>
-                </div>
-            </div>
-            {% endif %}
 
         </div>
     </section>
