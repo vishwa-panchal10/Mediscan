@@ -1,45 +1,54 @@
-# 🧠 MEDISCAN – AI-Powered Medicine Information Extraction System
+# 🚀 MEDISCAN
 
-MEDISCAN is an intelligent web application that analyzes **medicine strip images** and automatically extracts structured medical information using OCR and AI-based processing.
+### AI-Powered Medicine Information Extraction from Images
 
-It helps users quickly understand medicine details such as composition, usage, side effects, and alternatives — making healthcare information more accessible and user-friendly.
+MEDISCAN is a lightweight, AI-driven web application that enables users to **analyze medicine strip images** and instantly receive **structured, human-readable medical information**.
+
+By combining **OCR (Optical Character Recognition)** with **AI-based language processing**, the system transforms raw packaging text into meaningful insights such as composition, usage, and safety information — all in real time.
 
 ---
 
-## 🚀 Features
+# 🌟 Features
 
-### 🔍 Image Analysis
+## 📸 Image-Based Medicine Detection
 
-* Upload medicine strip images
-* OCR-based text extraction from packaging
-* AI-powered interpretation of extracted text
+* Upload a medicine strip image
+* Automatically extracts visible text using OCR
 
-### 💊 Medicine Information Extraction
+## 🧠 Intelligent Information Extraction
+
+Generates structured details including:
 
 * Medicine Name
-* Strength
+* Strength & Dosage
 * Composition / Active Ingredients
 * Usage / Treated Conditions
 * Advantages / Benefits
 * Common Side Effects
 * Serious Side Effects
-* Who Should Avoid the Medicine
+* Safety Warnings (Who should avoid)
 * Alternative Medicines
 
-### 🌐 Accessibility Features
+## 🌐 Multi-language Translation
 
-* Multi-language translation
-* Text-to-Speech (TTS) support
+* Converts extracted information into multiple languages
 
-### 🔐 Admin Dashboard
+## 🔊 Text-to-Speech (TTS)
 
-* Secure admin login
-* View uploaded medicines with images & timestamps
-* Restricted access (single admin only)
+* Converts medical information into audio output
+* Improves accessibility for all users
 
 ---
 
-## 🛠️ Tech Stack
+# ⚙️ How It Works
+
+```text
+Image Upload → OCR Extraction → AI Processing → Structured Medical Output
+```
+
+---
+
+# 🧰 Tech Stack
 
 ### Backend
 
@@ -52,26 +61,20 @@ It helps users quickly understand medicine details such as composition, usage, s
 * CSS
 * JavaScript
 
-### Database
+### AI & Processing
 
-* SQLite (local development)
-
-### Libraries & Tools
-
-* Flask-SQLAlchemy
-* Flask-CORS
-* Python-dotenv
+* OCR for text extraction
+* AI API for contextual medicine analysis
 
 ---
 
-## 📁 Project Structure
+# 📂 Project Structure
 
 ```
 mediscan/
 │
 ├── app.py
 ├── requirements.txt
-├── README.md
 ├── .gitignore
 │
 ├── services/
@@ -80,62 +83,53 @@ mediscan/
 │   └── tts_service.py
 │
 ├── templates/
-│   ├── index.html
-│   ├── admin.html
-│   └── login.html
+│   └── index.html
 │
 ├── static/
 │   ├── css/
-│   ├── js/
 │   ├── uploads/
 │   └── audio/
-│
-└── instance/
-    └── mediscan.db
 ```
 
 ---
 
-## ⚙️ Installation & Setup
+# ⚙️ Installation & Setup
 
-### 1️⃣ Clone the Repository
+## 1️⃣ Clone the repository
 
 ```bash
 git clone https://github.com/vishwa-panchal10/Mediscan.git
 cd Mediscan
 ```
 
----
-
-### 2️⃣ Create Virtual Environment
+## 2️⃣ Create a virtual environment
 
 ```bash
 python -m venv venv
+venv\Scripts\activate   # Windows
 ```
 
-Activate (Windows):
-
-```bash
-venv\Scripts\activate
-```
-
----
-
-### 3️⃣ Install Dependencies
+## 3️⃣ Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+## 4️⃣ Configure environment variables
 
-### 4️⃣ Run the Application
+Create a `.env` file in the root directory:
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+## 5️⃣ Run the application
 
 ```bash
 python app.py
 ```
 
-📍 App will run at:
+Application will run at:
 
 ```
 http://127.0.0.1:5000
@@ -143,60 +137,31 @@ http://127.0.0.1:5000
 
 ---
 
-## 🔐 Admin Panel
+# 🎯 Use Cases
 
-Access admin dashboard:
-
-```
-/admin
-```
-
-### Security Features
-
-* Single predefined admin account
-* No public registration
-* No admin creation allowed
-* Restricted dashboard access
+* 👨‍⚕️ Quick medicine understanding for patients
+* 💊 Pharmacy-level verification
+* 🎓 Educational AI healthcare projects
+* ♿ Accessibility-focused applications (via TTS)
 
 ---
 
-## 🎯 Use Cases
+# 🔮 Future Enhancements
 
-MEDISCAN can be used by:
-
-* 👨‍⚕️ Patients – to understand medicines easily
-* 💊 Pharmacists – to verify medicine details
-* 🏥 Healthcare assistants – to analyze packaging
-* ♿ Users needing accessible medical info
+* 📱 Mobile application version
+* 🌍 Advanced multilingual support
+* 🧾 Integration with official medicine databases
 
 ---
 
-## ⚠️ Limitations
-
-* Depends on image quality for OCR accuracy
-* Not a substitute for professional medical advice
-* Uses local SQLite DB (not persistent in deployment)
-
----
-
-## 🔮 Future Improvements
-
-* Integration with official medical databases
-* Cloud database (PostgreSQL / MySQL)
-* Mobile application (Android/iOS)
-* Barcode / QR-based detection
-* Enhanced multilingual support
-
----
-
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Vishwa Panchal**
 Computer Engineering Student
 
 ---
 
-## 📜 License
+# 📜 License
 
-This project is developed for **educational and research purposes only**.
+This project is intended for **educational and research purposes only**.
 
