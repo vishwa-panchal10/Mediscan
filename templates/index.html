@@ -1,208 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEDISCAN</title>
 
-<link rel="stylesheet" href="/static/css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDISCAN</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@600&display=swap"
+        rel="stylesheet">
 </head>
 
 <body class="dark">
 
-<!-- Data Vidwan Logo (Outside Navbar) -->
-<div class="datavidwan-container">
-    <img src="/static/image/Datavidwan.png" alt="Data Vidwan" class="datavidwan-logo">
-</div>
 
-<!-- NAVBAR -->
-<header class="navbar" id="navbar">
-    <!-- Left Logos -->
-    <div class="logo">
-            <img src="/static/image/logo.png" alt="Mediscan Logo" class="logo-img">
-            <span class="logo-highlight">MEDISCAN</span>
-    </div>
 
-    <!-- Navigation -->
-    <nav class="nav-buttons">
-        <a href="#home" class="nav-btn" id="nav-home">Home</a>
-        <a href="#features" class="nav-btn" id="nav-features">Features</a>
-        <a href="#how-it-works" class="nav-btn" id="nav-how">How It Works</a>
-        <a href="#analyzer" class="nav-btn" id="nav-analyzer">Analyzer</a>
-    </nav>
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+        <!-- Detached Branding: Data Vidwan -->
+        <div class="nav-branding-detached">
+            <img src="/static/image/Datavidwan.png" alt="Data Vidwan" class="datavidwan-logo-nav">
+        </div>
 
-</header>
+        <!-- Main Navigation Pill -->
+        <div class="nav-main-glass">
+            <!-- Center: MediScan Branding -->
+            <div class="nav-left">
+                <div class="logo">
+                    <img src="/static/image/logo.png" alt="Mediscan Logo" class="logo-img">
+                    <span class="logo-highlight">MEDISCAN</span>
+                </div>
+            </div>
 
-<!-- HERO -->
-<section class="hero" id="home">
+            <!-- Center: Navigation Links -->
+            <div class="nav-center">
+                <nav class="nav-buttons" id="navMenu">
+                    <a href="#home" class="nav-btn" id="nav-home">Home</a>
+                    <a href="#features" class="nav-btn" id="nav-features">Features</a>
+                    <a href="#how-it-works" class="nav-btn" id="nav-how">How It Works</a>
+                    <a href="#analyzer" class="nav-btn" id="nav-analyzer">Analyze</a>
+                    
+                    <!-- Authentication Links (Directly in menu for mobile '3 line' look) -->
+                    {% if session.get('user_id') or session.get('is_guest') %}
+                        {% if session.get('is_admin') %}
+                        <a href="/admin" class="nav-btn admin-mobile-link">Admin Panel</a>
+                        {% endif %}
+                        <a href="/logout" class="nav-btn logout-mobile-link">Logout</a>
+                    {% else %}
+                        <a href="/login" class="nav-btn login-mobile-link">Login</a>
+                        <a href="/guest" class="nav-btn guest-mobile-link">Continue as Guest</a>
+                    {% endif %}
+                </nav>
+                <button class="mobile-menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
-    <div class="ai-bg"></div>
-
-    <div class="hero-container">
-
-        <div class="hero-left">
-            <h1>
-                AI-Powered  <span class="gradient-text">Medicine</span><br>
-                 Identifier
-            </h1>
-
-            <div class="hero-buttons">
-                <a href="#analyzer" class="primary-cta">Start Analyzing</a>
-                <a href="#how-it-works" class="secondary-cta">How It Works</a>
+            <!-- Right: User Actions -->
+            <div class="nav-right">
+                {% if session.get('user_id') or session.get('is_guest') %}
+                <div class="user-profile">
+                    {% if session.get('is_admin') %}
+                    <a href="/admin" class="nav-btn admin-btn">Admin Panel</a>
+                    {% endif %}
+                    <span class="user-display">{{ session.get('user_email') }}</span>
+                    <a href="/logout" class="logout-btn">Logout</a>
+                </div>
+                {% else %}
+                <div class="auth-buttons-nav">
+                    <a href="/login" class="nav-btn login-btn">Login</a>
+                    <a href="/guest" class="nav-btn signup-btn">Continue as Guest</a>
+                </div>
+                {% endif %}
             </div>
         </div>
 
-        <div class="hero-right">
-            <div class="glass-card">
-                <div class="scan-line"></div>
-                <h3>AI Scan Preview</h3>
-                <p>Paracetamol 650mg</p>
-                <div class="status-badge">✓ Safe for Fever</div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="ai-bg"></div>
+
+        <div class="hero-container">
+
+            <div class="hero-left">
+                <h1>
+                    AI-Powered <span class="gradient-text">Medicine</span><br>
+                    Identifier
+                </h1>
+
+                <div class="hero-buttons">
+                    {% if session.get('user_id') or session.get('is_guest') %}
+                    <a href="#analyzer" class="primary-cta">Start Analyzing</a>
+                    {% else %}
+                    <a href="/login" class="primary-cta">Login Now</a>
+                    <a href="/guest" class="secondary-cta">Continue as Guest</a>
+                    {% endif %}
+                    <a href="#how-it-works" class="secondary-cta">How It Works</a>
+                </div>
             </div>
+
+            <div class="hero-right">
+                <div class="glass-card">
+                    <div class="scan-line"></div>
+                    <h3>AI Scan Preview</h3>
+                    <p>Paracetamol 650mg</p>
+                    <div class="status-badge">✓ Safe for Fever</div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+    </section>
 
-</section>
-
-<section id="how-it-works" class="how-ai-works">
-    <div class="section-header">
-        <h2>How <span>MEDISCAN</span> Works</h2>
-        <p>Advanced AI Vision + Medical Intelligence in 3 simple steps</p>
-    </div>
-
-    <div class="ai-steps">
-
-        <div class="ai-step-card">
-            <div class="step-number">01</div>
-            <h1>Upload Medicine Image</h1>
-            <p>Upload the medicine strip using your device camera or gallery.</p>
+    <section id="how-it-works" class="how-ai-works">
+        <div class="section-header">
+            <h2>How <span>MEDISCAN</span> Works</h2>
+            <p>Advanced AI Vision + Medical Intelligence in 3 simple steps</p>
         </div>
 
-        <div class="ai-step-card">
-            <div class="step-number">02</div>
-            <h1>AI Analysis</h1>
-            <p>Our model identifies the medicine, composition, and usage instantly.</p>
+        <div class="ai-steps">
+
+            <div class="ai-step-card">
+                <div class="step-number">01</div>
+                <h1>Upload Medicine Image</h1>
+                <p>Upload the medicine strip using your device camera or gallery.</p>
+            </div>
+
+            <div class="ai-step-card">
+                <div class="step-number">02</div>
+                <h1>AI Analysis</h1>
+                <p>Our model identifies the medicine, composition, and usage instantly.</p>
+            </div>
+
+            <div class="ai-step-card">
+                <div class="step-number">03</div>
+                <h1>Instant Smart Report</h1>
+                <p>Get structured insights including benefits, side effects, and alternatives.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="features" class="ai-features">
+        <div class="section-header">
+            <h2>Smart <span>AI Features</span></h2>
+            <p>Built with modern healthcare intelligence</p>
         </div>
 
-        <div class="ai-step-card">
-            <div class="step-number">03</div>
-            <h1>Instant Smart Report</h1>
-            <p>Get structured insights including benefits, side effects, and alternatives.</p>
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <h3>🔍 AI Medicine Detection</h3>
+                <p>Advanced vision model accurately detects medicine name and dosage.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📊 Structured Insights</h3>
+                <p>Clear breakdown of usage, side effects, and composition.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🌍 Multi-Language Support</h3>
+                <p>Translate medicine details instantly into your preferred language.</p>
+            </div>
+
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- ANALYZER -->
+    <section class="analyzer-section" id="analyzer">
+        <div class="analyzer-card">
 
-<section id="features" class="ai-features">
-    <div class="section-header">
-        <h2>Smart <span>AI Features</span></h2>
-        <p>Built with modern healthcare intelligence</p>
-    </div>
+            {% if session.get('user_id') or session.get('is_guest') %}
+            <h2 class="section-title">Analyze Medicine</h2>
 
-    <div class="features-grid">
+            <!-- Upload & Camera -->
+            <div class="analyzer-grid">
+                <div class="upload-box" id="uploadBox">
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <div class="upload-content" id="uploadContent">
+                        <div class="upload-icon-wrapper">
+                            <img src="/static/image/upload-icon.png" alt="Upload" class="upload-icon"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/126/126477.png'">
+                        </div>
+                        <p>Click to upload or drag & drop</p>
+                    </div>
+                    <img id="previewImage" class="preview-image" />
+                </div>
 
-        <div class="feature-card">
-            <h3>🔍 AI Medicine Detection</h3>
-            <p>Advanced vision model accurately detects medicine name and dosage.</p>
+                <div class="camera-card" id="cameraCard">
+                    <div class="camera-content" id="cameraContent">
+                        <div class="camera-placeholder">
+                            <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png" alt="Camera"
+                                class="camera-icon">
+                            <p>Use Device Camera</p>
+                            <button onclick="startCamera()" class="camera-btn start-btn">Open Camera</button>
+                        </div>
+
+                        <div id="cameraStream" class="camera-stream" style="display: none;">
+                            <video id="video" autoplay playsinline></video>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                            <div class="camera-controls">
+                                <button onclick="capturePhoto()" class="camera-btn capture-btn">Capture</button>
+                                <button onclick="stopCamera()" class="camera-btn stop-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Language -->
+            <div class="language-wrapper">
+                <label>Select Language</label>
+
+                <div class="custom-select">
+                    <select id="modalLanguage">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="kn">Kannada</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mr">Marathi</option>
+                        <option value="bn">Bengali</option>
+                        <option value="pa">Punjabi</option>
+                        <option value="or">Odia</option>
+                    </select>
+                    <span class="select-arrow">⌄</span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button onclick="analyze()" class="gradient-btn">Analyze</button>
+                <button onclick="summarize()" class="gradient-btn">Summary</button>
+                <button onclick="confirmTranslate()" class="gradient-btn">Translate</button>
+                <button id="ttsButton" onclick="speakText()" class="gradient-btn">
+                    🔊 Listen
+                </button>
+            </div>
+
+            <!-- Result -->
+            <div id="result" class="result-box">
+                <!-- Results appear here -->
+            </div>
+            {% else %}
+            <div class="auth-required">
+                <h2 class="section-title">Analyze Medicine</h2>
+                <p>Please login or continue as guest to use our AI Powered Medicine Identifier.</p>
+                <div class="auth-buttons" style="margin-top: 20px;">
+                    <a href="/login" class="primary-cta">Login Now</a>
+                    <a href="/guest" class="secondary-cta">Continue as Guest</a>
+                </div>
+            </div>
+            {% endif %}
+
         </div>
+    </section>
 
-        <div class="feature-card">
-            <h3>📊 Structured Insights</h3>
-            <p>Clear breakdown of usage, side effects, and composition.</p>
-        </div>
+    <footer class="footer">
+        <p>© 2026 MediScan | Data Vidwan</p>
+        <p class="disclaimer">
+            ⚠️ Disclaimer: The information provided is for informational purposes only.
+            Do not rely completely on this system. Always consult a pharmacist or
+            healthcare professional before using any medicine.
+        </p>
+    </footer>
 
-        <div class="feature-card">
-            <h3>🌍 Multi-Language Support</h3>
-            <p>Translate medicine details instantly into your preferred language.</p>
-        </div>
+    <script src="/static/js/script.js?v=2"></script>
+    <script>
+        function revealSections() {
+            const reveals = document.querySelectorAll(".reveal");
 
-    </div>
-</section>
+            reveals.forEach((element) => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 120;
 
-<!-- ANALYZER -->
-<section id="analyzer" class="analyzer-section">
-
-  <div class="analyzer-card">
-
-    <h2 class="section-title">Analyze Medicine</h2>
-
-    <!-- Upload -->
-    <div class="upload-box" id="uploadBox">
-        <input type="file" id="fileInput" accept="image/*" hidden>
-
-        <div class="upload-content" id="uploadContent">
-            
-            <p>Click to upload or drag & drop</p>
-        </div>
-
-        <img id="previewImage" class="preview-image" />
-    </div>
-    <!-- Language -->
-    <div class="language-wrapper">
-      <label>Select Language</label>
-
-      <div class="custom-select">
-        <select id="modalLanguage">
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <option value="gu">Gujarati</option>
-            <option value="ta">Tamil</option>
-            <option value="te">Telugu</option>
-            <option value="kn">Kannada</option>
-            <option value="ml">Malayalam</option>
-            <option value="mr">Marathi</option>
-            <option value="bn">Bengali</option>
-            <option value="pa">Punjabi</option>
-            <option value="or">Odia</option>
-        </select>
-        <span class="select-arrow">⌄</span>
-      </div>
-    </div>
-
-    <!-- Buttons -->
-    <div class="button-group">
-        <button onclick="analyze()" class="gradient-btn">Analyze</button>
-        <button onclick="confirmTranslate()" class="gradient-btn">Translate</button>
-        <button id="ttsButton" onclick="speakText()" class="gradient-btn">
-            🔊 Listen
-        </button>
-    </div>
-
-    <!-- Result -->
-    <div id="result" class="result-card"></div>
-
-  </div>
-
-</section>
-
-<footer class="footer">
-  <p>© 2026 MediScan | Data Vidwan</p>
-  <p class="disclaimer">
-    ⚠️ Disclaimer: The information provided is for informational purposes only.
-    Do not rely completely on this system. Always consult a pharmacist or
-    healthcare professional before using any medicine.
-  </p>
-</footer>
-
-<script src="/static/js/script.js?v=2"></script>
-<script>
-function revealSections() {
-    const reveals = document.querySelectorAll(".reveal");
-
-    reveals.forEach((element) => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const revealPoint = 120;
-
-        if (elementTop < windowHeight - revealPoint) {
-            element.classList.add("active");
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add("active");
+                }
+            });
         }
-    });
-}
 
-window.addEventListener("scroll", revealSections);
-</script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+
+            // Close menu when clicking a link
+            navMenu.querySelectorAll('.nav-btn').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                });
+            });
+        }
+
+        window.addEventListener("scroll", revealSections);
+    </script>
 </body>
+
 </html>

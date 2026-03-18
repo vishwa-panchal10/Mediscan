@@ -32,6 +32,81 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /* ==========================================
+   CAMERA LOGIC
+========================================== */
+let stream = null;
+
+async function startCamera() {
+    const video = document.getElementById("video");
+    const cameraStream = document.getElementById("cameraStream");
+    const cameraPlaceholder = document.querySelector(".camera-placeholder");
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Camera API is not supported in this browser or context. Please use a secure connection (HTTPS) or localhost.");
+        return;
+    }
+
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { facingMode: "environment" }, 
+            audio: false 
+        });
+        video.srcObject = stream;
+        cameraStream.style.display = "flex";
+        cameraPlaceholder.style.display = "none";
+        console.log("Camera started successfully");
+    } catch (err) {
+        console.error("Camera error details:", err);
+        if (err.name === 'NotAllowedError') {
+            alert("Camera access denied. Please enable camera permissions in your browser settings.");
+        } else if (err.name === 'NotFoundError') {
+            alert("No camera device found.");
+        } else {
+            alert("Could not access camera: " + err.message);
+        }
+    }
+}
+
+function stopCamera() {
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+    }
+    document.getElementById("cameraStream").style.display = "none";
+    document.querySelector(".camera-placeholder").style.display = "flex";
+}
+
+function capturePhoto() {
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const previewImage = document.getElementById("previewImage");
+    const uploadContent = document.getElementById("uploadContent");
+    const fileInput = document.getElementById("fileInput");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+
+    const dataUrl = canvas.toDataURL("image/jpeg");
+    previewImage.src = dataUrl;
+    previewImage.style.display = "block";
+    uploadContent.style.display = "none";
+
+    // Create a File object to mock the file input
+    fetch(dataUrl)
+        .then(res => res.blob())
+        .then(blob => {
+            const capturedFile = new File([blob], "captured_medicine.jpg", { type: "image/jpeg" });
+            
+            // Set the file in a custom property or handle it in analyze()
+            window.capturedFile = capturedFile;
+        });
+
+    stopCamera();
+}
+
+
+/* ==========================================
    GLOBAL VARIABLES
 ========================================== */
 let originalText = "";
@@ -118,10 +193,10 @@ function formatResult(text){
 ========================================== */
 function analyze() {
 
-    const file = document.getElementById("fileInput").files[0];
+    let file = window.capturedFile || document.getElementById("fileInput").files[0];
 
     if(!file){
-        alert("Please upload an image first.");
+        alert("Please upload an image or take a photo first.");
         return;
     }
 
@@ -137,7 +212,7 @@ function analyze() {
     })
     .then(res => res.json())
     .then(data => {
-        console.log("ANALYZE RESPONSE:", data); // 👈 ADD THIS
+        console.log("ANALYZE RESPONSE:", data);
 
         if(data.error){
             document.getElementById("result").innerHTML =
@@ -147,10 +222,62 @@ function analyze() {
 
         originalText = data.result;
         formatResult(originalText);
+        
+        // Clear captured file after successful analysis
+        window.capturedFile = null;
     })
     .catch(() => {
         document.getElementById("result").innerHTML =
             "<p style='color:red;'>Something went wrong.</p>";
+    });
+}
+
+
+/* ==========================================
+   SUMMARIZE FUNCTION
+========================================== */
+function summarize() {
+
+    if(!originalText){
+        alert("Analyze medicine first.");
+        return;
+    }
+
+    const container = document.getElementById("result");
+    container.innerHTML = "<p style='color:#2563eb;'>Generating summary... Please wait.</p>";
+
+    fetch("/summarize", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({
+            text: originalText
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.error){
+            container.innerHTML = "<p style='color:red;'>Error: " + data.error + "</p>";
+            return;
+        }
+
+        const summary = data.summary;
+        
+        // Format the summary as a list
+        container.innerHTML = "<h2 class='medicine-title'>Medicine Summary</h2>";
+        const ul = document.createElement("ul");
+        
+        const lines = summary.split("\n").filter(line => line.trim() !== "");
+        lines.forEach(line => {
+            const li = document.createElement("li");
+            li.textContent = cleanText(line).replace(/^-/, "").trim();
+            ul.appendChild(li);
+        });
+        
+        container.appendChild(ul);
+    })
+    .catch(() => {
+        container.innerHTML = "<p style='color:red;'>Summary failed. Server error.</p>";
     });
 }
 
@@ -297,6 +424,10 @@ window.addEventListener("load", setActiveNav);
 
 // ================= MAKE FUNCTIONS GLOBAL =================
 window.analyze = analyze;
+window.summarize = summarize;
 window.confirmTranslate = confirmTranslate;
 window.speakText = speakText;
+window.startCamera = startCamera;
+window.stopCamera = stopCamera;
+window.capturePhoto = capturePhoto;
 

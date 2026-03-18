@@ -22,7 +22,7 @@ def analyze_medicine(image_path):
     base64_image = encode_image(image_path)
 
     prompt = """
-You are a professional medical assistant AI.
+You are a highly knowledgeable and precise medical assistant AI.
 
 Step 1: Image Validation
 Carefully examine the uploaded image.
@@ -39,51 +39,54 @@ Do NOT generate any medicine information in that case.
 Step 2: Medicine Information Extraction
 Carefully analyze the uploaded medicine image and extract:
 - Medicine Name
-- Strength
-- Active Ingredient
+- Strength (if unclear, estimate the most common strength for that medicine)
+- Active Ingredient (very important)
 - Any visible manufacturer details
 
-
 Step 3: Medicine Information Generation
-Using medical knowledge, provide COMPLETE detailed information about the extracted medicine.
+Using strong medical knowledge, generate COMPLETE, PRACTICAL, and MEDICALLY ACCURATE information.
 
-Return the output STRICTLY in the following structured format.
+IMPORTANT INSTRUCTIONS:
+- Do NOT give generic answers
+- Always give SPECIFIC diseases/conditions (e.g., acne, UTI, pneumonia, chlamydia)
+- Always mention if medicine works ONLY for bacterial infections (if applicable)
+- Always include at least 4–6 clear usage points
+- Always include important real-world precautions and risks
+- If the exact brand data is unclear, rely on the active ingredient knowledge
+
+CRITICAL MEDICAL REQUIREMENTS:
+- Include common AND important side effects (e.g., photosensitivity for doxycycline)
+- Include at least 2–3 serious side effects (even if rare)
+- Include practical warnings (e.g., avoid milk, sunlight, alcohol, drug interactions if relevant)
+- Include specific groups who should avoid (children, pregnant women, liver/kidney issues, etc.)
+- Do NOT skip important safety information
 
 Formatting Rules:
 - Medicine Name must be written in ONE LINE after the colon.
-- Other sections must contain short bullet points.
-- Do NOT use symbols like *, •, -, or markdown.
-- Keep each point clear and concise (1–2 lines maximum).
-- Do NOT say “Information not available from image”.
-- If brand data is missing, provide details based on active ingredient.
+- Other sections must contain plain text bullet-style lines WITHOUT using symbols like *, •, -, or markdown
+- Each point must be short (1–2 lines max)
+- Minimum 2-3 points per section wherever applicable
+- Do NOT write paragraphs
+- Do NOT say “Information not available from image”
+- Be precise, structured, and medically useful
 
-Medicine Name: 
+Medicine Name:
 
-
-Strength: 
-
+Strength:
 
 Composition / Active Ingredient:
 
-
 Usage / Diseases or Conditions Treated:
-
 
 Advantages / Main Benefits:
 
-
 Disadvantages / Common Side Effects:
-
 
 Serious Side Effects:
 
-
 Who Should Avoid This Medicine:
 
-
 Alternative Medicines (Same Composition):
-
-
 """
 
     response = client.chat.completions.create(
@@ -103,6 +106,29 @@ Alternative Medicines (Same Composition):
             }
         ],
         max_tokens=1000,
+    )
+
+    return response.choices[0].message.content
+
+
+def summarize_medicine_details(text):
+    prompt = f"""
+You are a medical assistant AI. Based on the following extracted medicine details, provide a concise summary in 5 to 10 important points.
+The points should be written as PLAIN TEXT lines. Do NOT use any symbols like *, •, -, or markdown.
+Each point should be clear and concise.
+
+Medicine Details:
+{text}
+
+Summary Points:
+"""
+
+    response = client.chat.completions.create(
+        model=MODEL_NAME,
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=500,
     )
 
     return response.choices[0].message.content
