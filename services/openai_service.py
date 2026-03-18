@@ -10,7 +10,11 @@ MODEL_NAME = "gpt-4.1-mini"  # or "gpt-4.1" if you have access
 
 API_KEY = os.getenv("OPENAI_API_KEY")
 
-client = OpenAI(api_key=API_KEY)
+def get_client():
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY not set")
+    return OpenAI(api_key=api_key)
 
 
 def encode_image(image_path):
@@ -88,7 +92,7 @@ Who Should Avoid This Medicine:
 
 Alternative Medicines (Same Composition):
 """
-
+    client = get_client()
     response = client.chat.completions.create(
         model=MODEL_NAME,
         messages=[
@@ -122,7 +126,7 @@ Medicine Details:
 
 Summary Points:
 """
-
+    client = get_client()
     response = client.chat.completions.create(
         model=MODEL_NAME,
         messages=[
