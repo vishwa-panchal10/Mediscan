@@ -1,55 +1,72 @@
-# MEDISCAN – Medicine Information Extraction System
+# 🧠 MEDISCAN – AI-Powered Medicine Information Extraction System
 
-MEDISCAN is a web-based application that analyzes medicine strip images and extracts important medicine information automatically. The system performs OCR-based text extraction from uploaded medicine images and generates structured details such as composition, usage, advantages, and possible side effects.
+MEDISCAN is an intelligent web application that analyzes **medicine strip images** and automatically extracts structured medical information using OCR and AI-based processing.
 
-The application is built using Python and Flask and integrates AI-based analysis to interpret medicine information efficiently.
+It helps users quickly understand medicine details such as composition, usage, side effects, and alternatives — making healthcare information more accessible and user-friendly.
 
+---
 
-# Features
+## 🚀 Features
 
-• Upload medicine strip images for analysis
-• Automatic OCR-based text extraction from medicine packaging
-• Extract detailed medicine information including
+### 🔍 Image Analysis
+
+* Upload medicine strip images
+* OCR-based text extraction from packaging
+* AI-powered interpretation of extracted text
+
+### 💊 Medicine Information Extraction
 
 * Medicine Name
 * Strength
 * Composition / Active Ingredients
 * Usage / Treated Conditions
 * Advantages / Benefits
-* Disadvantages / Common Side Effects
+* Common Side Effects
 * Serious Side Effects
 * Who Should Avoid the Medicine
 * Alternative Medicines
 
-• Multi-language translation support
-• Text-to-Speech support for medicine information
-• Admin dashboard to monitor uploaded medicines
-• Secure admin authentication system
-• Stores medicine analysis with image and timestamp
+### 🌐 Accessibility Features
 
+* Multi-language translation
+* Text-to-Speech (TTS) support
 
-# Technologies Used
+### 🔐 Admin Dashboard
 
-Backend
-• Python
-• Flask
+* Secure admin login
+* View uploaded medicines with images & timestamps
+* Restricted access (single admin only)
 
-Frontend
-• HTML
-• CSS
-• JavaScript
+---
 
-Database
-• SQLite
+## 🛠️ Tech Stack
 
-Additional Libraries
-• Flask-SQLAlchemy
-• Flask-CORS
-• Python dotenv
+### Backend
 
+* Python
+* Flask
 
-# Project Structure
+### Frontend
 
+* HTML
+* CSS
+* JavaScript
+
+### Database
+
+* SQLite (local development)
+
+### Libraries & Tools
+
+* Flask-SQLAlchemy
+* Flask-CORS
+* Python-dotenv
+
+---
+
+## 📁 Project Structure
+
+```
 mediscan/
 │
 ├── app.py
@@ -65,100 +82,121 @@ mediscan/
 ├── templates/
 │   ├── index.html
 │   ├── admin.html
-│   └── admin_login.html
+│   └── login.html
 │
 ├── static/
 │   ├── css/
+│   ├── js/
 │   ├── uploads/
 │   └── audio/
 │
 └── instance/
     └── mediscan.db
-
-
-# Installation
-
-### 1 Clone the repository
-
-git clone https://github.com/vishwa-panchal10/mediscan.git
-
-
-### 2 Navigate to the project directory
-
-cd mediscan
-
-
-### 3 Create a virtual environment
-
-python -m venv venv
-
-Activate the environment (Windows)
-
-venv\Scripts\activate
-
-
-### 4 Install dependencies
-
-pip install -r requirements.txt
-
-
-### 5 Run the application
-
-python app.py
-
-The application will start at:
-
-
-http://127.0.0.1:5000
-
-
-# Admin Panel
-
-The admin dashboard is available at:
-
-
-/admin
-
-Admin authentication is restricted to a **single predefined administrator account**.
-
-Security features:
-
-• Only the project owner can log in as admin
-• No user registration system is available
-• No option for users to create admin accounts
-• Password change functionality is disabled for public users
-
-This ensures that only the authorized administrator can access the dashboard and view uploaded medicine data.
-
-
-
-# Use Case
-
-MEDISCAN can assist:
-
-• Patients who want to understand medicine information
-• Pharmacists verifying medicine details
-• Healthcare assistants analyzing medicine packaging
-• Users needing accessible medicine explanations
-
-
-# Future Improvements
-
-• Integration with official medicine databases
-• Mobile application version
-• Barcode or QR code-based medicine detection
-• Expanded multilingual support
-
-# Author
-
-Vishwa Panchal
-Computer Engineering Student
-
-
-# License
-
-This project is developed for educational and research purposes.
+```
 
 ---
 
-✅ If you want, I can also give you a **much more impressive README version (with badges, UI screenshots, architecture diagram, and demo GIF)** that makes your project look **like a professional AI product on GitHub**.
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/vishwa-panchal10/Mediscan.git
+cd Mediscan
+```
+
+---
+
+### 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate (Windows):
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+### 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4️⃣ Run the Application
+
+```bash
+python app.py
+```
+
+📍 App will run at:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## 🔐 Admin Panel
+
+Access admin dashboard:
+
+```
+/admin
+```
+
+### Security Features
+
+* Single predefined admin account
+* No public registration
+* No admin creation allowed
+* Restricted dashboard access
+
+---
+
+## 🎯 Use Cases
+
+MEDISCAN can be used by:
+
+* 👨‍⚕️ Patients – to understand medicines easily
+* 💊 Pharmacists – to verify medicine details
+* 🏥 Healthcare assistants – to analyze packaging
+* ♿ Users needing accessible medical info
+
+---
+
+## ⚠️ Limitations
+
+* Depends on image quality for OCR accuracy
+* Not a substitute for professional medical advice
+* Uses local SQLite DB (not persistent in deployment)
+
+---
+
+## 🔮 Future Improvements
+
+* Integration with official medical databases
+* Cloud database (PostgreSQL / MySQL)
+* Mobile application (Android/iOS)
+* Barcode / QR-based detection
+* Enhanced multilingual support
+
+---
+
+## 👨‍💻 Author
+
+**Vishwa Panchal**
+Computer Engineering Student
+
+---
+
+## 📜 License
+
+This project is developed for **educational and research purposes only**.
+
