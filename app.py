@@ -25,7 +25,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Configure audio folder
-AUDIO_FOLDER = "static/tts"
+AUDIO_FOLDER = "static/audio"
 if not os.path.exists(AUDIO_FOLDER):
     os.makedirs(AUDIO_FOLDER)
 app.config["AUDIO_FOLDER"] = AUDIO_FOLDER
@@ -139,11 +139,15 @@ def tts():
 
         audio_filename = generate_tts(text, lang, app.config["AUDIO_FOLDER"])
 
-        return jsonify({"audio_url": f"/static/tts/{audio_filename}"})
+        return jsonify({"audio_url": f"/static/audio/{audio_filename}"})
 
     except Exception as e:
         print("TTS ERROR:", e)
         return jsonify({"error": str(e)}), 500
     
+@app.route("/test")
+def test():
+    return "App is working!"
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
