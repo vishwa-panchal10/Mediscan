@@ -283,35 +283,73 @@ body {
         display: none !important;
     }
 
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        top: 10px;
+        width: 95%;
+        left: 2.5%;
+        transform: none;
+        padding: 0;
+    }
+
+    .nav-branding-detached {
+        padding: 6px 20px;
+        border-radius: 30px;
+        margin: 0 auto;
+    }
+
+    .nav-main-glass {
+        gap: 20px;
+        padding: 0 15px;
+        width: 100%;
+        max-width: 450px;
+        justify-content: space-between;
+        height: 60px;
+        margin: 0 auto;
+    }
+
+    .logo-highlight {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .logo {
+        padding-right: 10px;
+        gap: 6px;
+        border-right: none;
+    }
+
     .nav-buttons.active {
         display: flex !important;
-        position: fixed;
-        top: 85px;
+        position: absolute;
+        top: 75px;
         left: 50%;
         transform: translateX(-50%);
-        width: 90%;
-        max-width: 400px;
+        width: 100%;
+        max-width: 320px;
         flex-direction: column;
         background: rgba(10, 15, 28, 0.98);
         backdrop-filter: blur(25px);
-        padding: 30px;
-        border-radius: 25px;
+        padding: 20px;
+        border-radius: 20px;
         border: 1px solid rgba(0, 245, 255, 0.2);
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
         z-index: 2000;
-        gap: 20px;
+        gap: 15px;
         text-align: center;
         animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
     .nav-buttons.active .nav-btn {
         display: flex !important;
-        font-size: 16px;
-        padding: 12px;
+        font-size: 14px;
+        padding: 10px;
         width: 100%;
-        border-radius: 15px;
-        margin-bottom: 5px;
+        border-radius: 12px;
+        margin-bottom: 0;
         background: rgba(255, 255, 255, 0.03);
+        justify-content: center;
     }
 
     .nav-buttons.active .nav-btn:hover {
@@ -1274,38 +1312,51 @@ body {
     margin-top: 10px;
 }
 
-/* Mobile View (Below 768px) - Priority Fix */
-@media screen and (max-width: 767px) {
+/* ================= MOBILE RESPONSIVENESS OVERRIDES ================= */
+@media screen and (max-width: 1150px) {
     .navbar {
-        top: 10px !important;
         flex-direction: column !important;
-        gap: 12px !important;
-        align-items: center !important;
+        gap: 15px !important;
+        top: 10px !important;
         width: 100% !important;
         left: 0 !important;
         transform: none !important;
         padding: 0 10px !important;
+        position: fixed !important;
+        align-items: center !important;
     }
 
     .nav-branding-detached {
-        padding: 4px 12px !important;
+        padding: 5px 15px !important;
         border-radius: 20px !important;
         margin-bottom: 5px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
     }
 
     .datavidwan-logo-nav {
-        height: 25px !important;
+        height: 30px !important;
     }
 
     .nav-main-glass {
-        width: 100% !important;
-        max-width: 350px !important;
-        height: 55px !important;
-        border-radius: 15px !important;
-        padding: 0 12px !important;
+        width: 95% !important;
+        max-width: 400px !important;
+        height: 60px !important;
+        gap: 10px !important;
+        padding: 0 15px !important;
+        border-radius: 30px !important;
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
+    }
+
+    .logo {
+        padding-right: 10px !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        gap: 8px !important;
+    }
+
+    .logo-img {
+        height: 28px !important;
     }
 
     .logo-highlight {
@@ -1313,13 +1364,133 @@ body {
         letter-spacing: 1px !important;
     }
 
-    .logo-img {
-        height: 22px !important;
+    .nav-buttons.active {
+        display: flex !important;
+        position: fixed !important;
+        top: 100px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 90% !important;
+        max-width: 320px !important;
+        flex-direction: column !important;
+        background: rgba(10, 15, 28, 0.98) !important;
+        backdrop-filter: blur(25px) !important;
+        padding: 20px !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(0, 245, 255, 0.3) !important;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9) !important;
+        z-index: 9999 !important;
+        gap: 12px !important;
+        text-align: center !important;
     }
 
-    .logo {
-        gap: 8px !important;
-        padding-right: 8px !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    .nav-buttons.active .nav-btn {
+        font-size: 14px !important;
+        padding: 10px !important;
+        width: 100% !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 12px !important;
+    }
+
+    /* Fix Hero Overflow */
+    .hero-container {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding-top: 120px !important;
+        gap: 30px !important;
+    }
+
+    .hero-left h1 {
+        font-size: 36px !important;
+    }
+
+    .hero-left p {
+        font-size: 16px !important;
+    }
+
+    .hero-buttons {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+
+    .primary-cta, .secondary-cta {
+        font-size: 18px !important;
+        padding: 12px 24px !important;
+        width: 100% !important;
+        max-width: 250px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .how-ai-works,
+    .ai-features {
+        padding: 60px 15px;
+    }
+
+    .analyzer-section {
+        padding: 80px 5%;
+    }
+
+    .ai-step-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .analyzer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analyzer-card {
+        padding: 30px 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .gradient-btn {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-left h1 {
+        font-size: 34px;
+    }
+
+    .hero-left p {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .primary-cta,
+    .secondary-cta {
+        font-size: 18px;
+        padding: 12px 20px;
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+    }
+
+    .glass-card {
+        width: 100%;
+        max-width: 280px;
+        padding: 25px 15px;
+    }
+
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .section-title {
+        font-size: 28px;
     }
 }
