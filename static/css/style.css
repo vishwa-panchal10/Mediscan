@@ -47,6 +47,21 @@ body {
 /* ================= BRANDING AREA ================= */
 /* ================= BRANDING: DETACHED logo ================= */
 /* ================= MAIN NAVBAR LAYOUT ================= */
+.navbar-bg-glass {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: rgba(10, 15, 28, 0.45);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 998;
+    pointer-events: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
 .navbar {
     position: fixed;
     top: 15px;
@@ -72,7 +87,7 @@ body {
     /* More glassmorphic light pill */
     backdrop-filter: blur(12px);
     border-radius: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgb(255, 255, 255);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     flex-shrink: 0;
     /* Forced to never shrink */
@@ -83,7 +98,7 @@ body {
     display: block;
     height: 50px;
     width: 60px;
-    background: #ffffff6d;
+    background: #ffffff;
     border: none !important;
     padding: 0 !important;
     box-shadow: none !important;
@@ -122,7 +137,7 @@ body {
     flex-shrink: 0;
     /* Prevent overlap by not shrinking */
     border-radius: 40px;
-    background: rgba(15, 23, 42, 0.92);
+    background: rgba(15, 23, 42, 0.75);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
@@ -1314,6 +1329,13 @@ body {
 
 /* ================= MOBILE RESPONSIVENESS OVERRIDES ================= */
 @media screen and (max-width: 1150px) {
+    .navbar-bg-glass {
+        height: 160px !important;
+        background: rgba(10, 15, 28, 0.6) !important;
+        backdrop-filter: blur(30px) !important;
+        -webkit-backdrop-filter: blur(30px) !important;
+    }
+
     .navbar {
         flex-direction: column !important;
         gap: 15px !important;
@@ -1330,7 +1352,7 @@ body {
         padding: 5px 15px !important;
         border-radius: 20px !important;
         margin-bottom: 5px !important;
-        background: rgba(255, 255, 255, 0.9) !important;
+        background: rgb(255, 255, 255) !important;
     }
 
     .datavidwan-logo-nav {
@@ -1413,7 +1435,8 @@ body {
         flex-wrap: wrap !important;
     }
 
-    .primary-cta, .secondary-cta {
+    .primary-cta,
+    .secondary-cta {
         font-size: 18px !important;
         padding: 12px 24px !important;
         width: 100% !important;
