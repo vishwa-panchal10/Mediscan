@@ -105,6 +105,11 @@ body {
     filter: brightness(1.1);
 }
 
+/* Visibility Control for Data Vidwan Logo */
+.footer-logo {
+    display: none;
+}
+
 
 .logo-highlight {
     font-family: 'Orbitron', sans-serif;
@@ -1330,10 +1335,22 @@ body {
 /* ================= MOBILE RESPONSIVENESS OVERRIDES ================= */
 @media screen and (max-width: 1150px) {
     .navbar-bg-glass {
-        height: 160px !important;
+        height: 85px !important;
         background: rgba(10, 15, 28, 0.6) !important;
         backdrop-filter: blur(30px) !important;
         -webkit-backdrop-filter: blur(30px) !important;
+    }
+
+    /* Hide Data Vidwan from header in mobile/tablet */
+    .header-logo {
+        display: none !important;
+    }
+
+    /* Show Data Vidwan in footer for mobile/tablet */
+    .footer-logo {
+        display: flex !important;
+        justify-content: center;
+        margin-bottom: 25px;
     }
 
     .navbar {
