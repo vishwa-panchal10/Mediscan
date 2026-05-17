@@ -6,7 +6,6 @@ MEDISCAN is a lightweight, AI-driven web application that enables users to **ana
 
 By combining **OCR (Optical Character Recognition)** with **AI-based language processing**, the system transforms raw packaging text into meaningful insights such as composition, usage, and safety information — all in real time.
 
----
 
 # 🌟 Features
 
@@ -38,7 +37,6 @@ Generates structured details including:
 * Converts medical information into audio output
 * Improves accessibility for all users
 
----
 
 # ⚙️ How It Works
 
@@ -46,7 +44,7 @@ Generates structured details including:
 Image Upload → OCR Extraction → AI Processing → Structured Medical Output
 ```
 
----
+
 
 # 🧰 Tech Stack
 
@@ -66,7 +64,6 @@ Image Upload → OCR Extraction → AI Processing → Structured Medical Output
 * OCR for text extraction
 * AI API for contextual medicine analysis
 
----
 
 # 📂 Project Structure
 
@@ -91,7 +88,6 @@ mediscan/
 │   └── audio/
 ```
 
----
 
 # ⚙️ Installation & Setup
 
@@ -135,7 +131,6 @@ Application will run at:
 http://127.0.0.1:5000
 ```
 
----
 
 # 🎯 Use Cases
 
@@ -144,7 +139,6 @@ http://127.0.0.1:5000
 * 🎓 Educational AI healthcare projects
 * ♿ Accessibility-focused applications (via TTS)
 
----
 
 # 🔮 Future Enhancements
 
@@ -152,14 +146,12 @@ http://127.0.0.1:5000
 * 🌍 Advanced multilingual support
 * 🧾 Integration with official medicine databases
 
----
 
 # 👨‍💻 Author
 
 **Vishwa Panchal**
-Computer Engineering Student
+Computer Science Engineering Student
 
----
 
 # 📜 License
 
